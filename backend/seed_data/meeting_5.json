@@ -1,0 +1,163 @@
+{
+  "title": "Incident Post-Mortem",
+  "date": "2026-07-27T20:49:47Z",
+  "duration_seconds": 3000,
+  "participants": [
+    {
+      "name": "Alice Johnson",
+      "email": "alice@example.com"
+    },
+    {
+      "name": "Charlie Davis",
+      "email": "charlie@example.com"
+    },
+    {
+      "name": "Hannah Lee",
+      "email": "hannah@example.com"
+    }
+  ],
+  "speakers": [
+    "Alice Johnson",
+    "Charlie Davis",
+    "Hannah Lee"
+  ],
+  "transcript": [
+    {
+      "start": 0,
+      "end": 15,
+      "speaker": "Alice Johnson",
+      "text": "Let's begin the post-mortem for yesterday's outage. Charlie, can you walk us through the timeline?"
+    },
+    {
+      "start": 16,
+      "end": 30,
+      "speaker": "Charlie Davis",
+      "text": "At 2 PM, we saw a massive spike in database connections, which eventually starved the connection pool."
+    },
+    {
+      "start": 31,
+      "end": 45,
+      "speaker": "Charlie Davis",
+      "text": "The API started returning 500s. We identified a misconfigured cron job that was spawning too many worker threads."
+    },
+    {
+      "start": 46,
+      "end": 60,
+      "speaker": "Hannah Lee",
+      "text": "I was on call. It took us about 30 minutes to pinpoint the cron job."
+    },
+    {
+      "start": 61,
+      "end": 75,
+      "speaker": "Hannah Lee",
+      "text": "Once we killed it, the system recovered immediately. The downtime cost us around $15,000 in lost transactions."
+    },
+    {
+      "start": 76,
+      "end": 90,
+      "speaker": "Alice Johnson",
+      "text": "That's a significant impact. We need better alerting on connection pool saturation."
+    },
+    {
+      "start": 91,
+      "end": 105,
+      "speaker": "Alice Johnson",
+      "text": "Hannah, can you take the action item to set up DataDog alerts for when the connection pool hits 80% capacity?"
+    },
+    {
+      "start": 106,
+      "end": 120,
+      "speaker": "Hannah Lee",
+      "text": "Yes, I can do that today. I'll also add a runbook entry for this specific scenario."
+    },
+    {
+      "start": 121,
+      "end": 135,
+      "speaker": "Charlie Davis",
+      "text": "I'll take the action to fix the cron job configuration so it enforces a strict concurrency limit."
+    },
+    {
+      "start": 136,
+      "end": 150,
+      "speaker": "Charlie Davis",
+      "text": "We should also review all other cron jobs to ensure they follow this pattern. I will do that tomorrow."
+    },
+    {
+      "start": 151,
+      "end": 165,
+      "speaker": "Alice Johnson",
+      "text": "Is there any risk of data corruption from the dropped connections?"
+    },
+    {
+      "start": 166,
+      "end": 180,
+      "speaker": "Hannah Lee",
+      "text": "We ran a full integrity check this morning. 100% of the transactions were either completed or safely rolled back."
+    },
+    {
+      "start": 181,
+      "end": 195,
+      "speaker": "Alice Johnson",
+      "text": "That's a relief. Let's make sure these action items are done by the end of the sprint."
+    },
+    {
+      "start": 196,
+      "end": 210,
+      "speaker": "Alice Johnson",
+      "text": "Thanks for the quick response during the incident, team. We learned a valuable lesson here."
+    },
+    {
+      "start": 211,
+      "end": 225,
+      "speaker": "Charlie Davis",
+      "text": "Agreed. See you all at the next standup."
+    }
+  ],
+  "summary": {
+    "overview_text": "Post-mortem for the recent outage caused by a misconfigured cron job exhausting the database connection pool. The team resolved the issue in 30 minutes. Action items include setting up new connection pool alerts, updating the runbook, and fixing the cron job concurrency limits.",
+    "keywords": [
+      "outage",
+      "post-mortem",
+      "database",
+      "cron job",
+      "alerting"
+    ],
+    "generated_by": "seeded"
+  },
+  "outline_items": [
+    {
+      "title": "Incident Timeline",
+      "start_time_seconds": 16
+    },
+    {
+      "title": "Impact & Alerting Improvements",
+      "start_time_seconds": 61
+    },
+    {
+      "title": "Root Cause Fix",
+      "start_time_seconds": 121
+    }
+  ],
+  "action_items": [
+    {
+      "text": "Set up DataDog alerts for connection pool > 80%",
+      "assignee": "Hannah Lee",
+      "is_completed": false
+    },
+    {
+      "text": "Add runbook entry for connection pool exhaustion",
+      "assignee": "Hannah Lee",
+      "is_completed": false
+    },
+    {
+      "text": "Fix cron job concurrency limit",
+      "assignee": "Charlie Davis",
+      "is_completed": false
+    },
+    {
+      "text": "Audit other cron jobs for concurrency limits tomorrow",
+      "assignee": "Charlie Davis",
+      "is_completed": false
+    }
+  ]
+}

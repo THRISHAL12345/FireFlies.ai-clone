@@ -1,0 +1,192 @@
+{
+  "title": "Q3 Planning Session",
+  "date": "2026-07-23T08:49:47Z",
+  "duration_seconds": 3600,
+  "participants": [
+    {
+      "name": "Alice Johnson",
+      "email": "alice@example.com"
+    },
+    {
+      "name": "Charlie Davis",
+      "email": "charlie@example.com"
+    },
+    {
+      "name": "Diana Prince",
+      "email": "diana@example.com"
+    }
+  ],
+  "speakers": [
+    "Alice Johnson",
+    "Charlie Davis",
+    "Diana Prince"
+  ],
+  "transcript": [
+    {
+      "start": 0,
+      "end": 15,
+      "speaker": "Alice Johnson",
+      "text": "Welcome to our Q3 planning session. Our main goal is to align on the roadmap for the next three months."
+    },
+    {
+      "start": 16,
+      "end": 28,
+      "speaker": "Alice Johnson",
+      "text": "Before we dive in, let's look at the metrics from last quarter. We hit $2.5M in ARR."
+    },
+    {
+      "start": 29,
+      "end": 45,
+      "speaker": "Charlie Davis",
+      "text": "That's fantastic. Engineering's primary focus for Q3 will be migrating to the new database cluster."
+    },
+    {
+      "start": 46,
+      "end": 60,
+      "speaker": "Diana Prince",
+      "text": "Will that cause any downtime? We need to notify customers if it does."
+    },
+    {
+      "start": 61,
+      "end": 75,
+      "speaker": "Charlie Davis",
+      "text": "We expect maybe 15 minutes of downtime on a Sunday night. I will do a risk assessment by next week."
+    },
+    {
+      "start": 76,
+      "end": 90,
+      "speaker": "Alice Johnson",
+      "text": "Good. After the migration, what's next? We want to tackle the mobile app redesign."
+    },
+    {
+      "start": 91,
+      "end": 105,
+      "speaker": "Diana Prince",
+      "text": "From the design side, we have wireframes ready for the mobile app."
+    },
+    {
+      "start": 106,
+      "end": 120,
+      "speaker": "Diana Prince",
+      "text": "We need engineering to review them by next Friday so we can finalize the assets."
+    },
+    {
+      "start": 121,
+      "end": 135,
+      "speaker": "Charlie Davis",
+      "text": "I'll assign two engineers to review the wireframes. We should have feedback for you on Monday."
+    },
+    {
+      "start": 136,
+      "end": 150,
+      "speaker": "Alice Johnson",
+      "text": "Okay, Charlie, please schedule a design review meeting with your team. What about marketing?"
+    },
+    {
+      "start": 151,
+      "end": 165,
+      "speaker": "Diana Prince",
+      "text": "Marketing is planning a big push for the new mobile release. It will use up 40% of our Q3 budget."
+    },
+    {
+      "start": 166,
+      "end": 180,
+      "speaker": "Diana Prince",
+      "text": "We need a confirmed launch date by mid-Q3 to start booking ads. When can we launch?"
+    },
+    {
+      "start": 181,
+      "end": 195,
+      "speaker": "Charlie Davis",
+      "text": "If everything goes perfectly, we can launch in early August. Maybe August 5th."
+    },
+    {
+      "start": 196,
+      "end": 210,
+      "speaker": "Alice Johnson",
+      "text": "Let's be realistic. Are there any risks that might push it back?"
+    },
+    {
+      "start": 211,
+      "end": 225,
+      "speaker": "Charlie Davis",
+      "text": "If the database migration takes longer, it will push the mobile app out by a week."
+    },
+    {
+      "start": 226,
+      "end": 240,
+      "speaker": "Charlie Davis",
+      "text": "I can commit to August 15th for the launch. Let's aim for that to be safe."
+    },
+    {
+      "start": 241,
+      "end": 255,
+      "speaker": "Diana Prince",
+      "text": "August 15th works perfectly. I will draft the marketing copy tomorrow."
+    },
+    {
+      "start": 256,
+      "end": 270,
+      "speaker": "Alice Johnson",
+      "text": "Perfect. August 15th it is. Let's make sure all our action items reflect this timeline."
+    },
+    {
+      "start": 271,
+      "end": 285,
+      "speaker": "Alice Johnson",
+      "text": "I also need someone to update the investor deck with the new Q3 metrics targets."
+    },
+    {
+      "start": 286,
+      "end": 300,
+      "speaker": "Diana Prince",
+      "text": "I can take that action item. I'll have the deck updated by next week."
+    }
+  ],
+  "summary": {
+    "overview_text": "Q3 planning focused on the database migration and mobile app redesign. Engineering will spend a month on the database before starting the mobile app. A launch date of August 15th was agreed upon, allowing marketing to plan their push.",
+    "keywords": [
+      "Q3",
+      "database migration",
+      "mobile app",
+      "launch date"
+    ],
+    "generated_by": "seeded"
+  },
+  "outline_items": [
+    {
+      "title": "Engineering Goals",
+      "start_time_seconds": 30
+    },
+    {
+      "title": "Design Update",
+      "start_time_seconds": 90
+    },
+    {
+      "title": "Marketing Launch Date",
+      "start_time_seconds": 180
+    }
+  ],
+  "action_items": [
+    {
+      "text": "Do a risk assessment by next week",
+      "assignee": "Charlie Davis",
+      "is_completed": false
+    },
+    {
+      "text": "Review mobile app wireframes",
+      "assignee": "Charlie Davis",
+      "is_completed": false
+    },
+    {
+      "text": "Draft the marketing copy tomorrow",
+      "assignee": "Diana Prince",
+      "is_completed": false
+    },
+    {
+      "text": "Update the investor deck with the new Q3 metrics targets",
+      "assignee": "Diana Prince",
+      "is_completed": false
+    }
+  ]
+}

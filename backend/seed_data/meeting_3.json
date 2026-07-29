@@ -1,0 +1,186 @@
+{
+  "title": "Sales Sync with Acme Corp",
+  "date": "2026-07-18T08:49:47Z",
+  "duration_seconds": 2400,
+  "participants": [
+    {
+      "name": "Eve Smith",
+      "email": "eve@example.com"
+    },
+    {
+      "name": "Frank White",
+      "email": "frank@acme.com"
+    }
+  ],
+  "speakers": [
+    "Eve Smith",
+    "Frank White"
+  ],
+  "transcript": [
+    {
+      "start": 0,
+      "end": 15,
+      "speaker": "Eve Smith",
+      "text": "Hi Frank, thanks for joining. I wanted to walk you through our new enterprise tier."
+    },
+    {
+      "start": 16,
+      "end": 30,
+      "speaker": "Eve Smith",
+      "text": "Are you currently looking to upgrade from your professional plan?"
+    },
+    {
+      "start": 31,
+      "end": 45,
+      "speaker": "Frank White",
+      "text": "Hi Eve. Yes, we are definitely interested in the enterprise tier."
+    },
+    {
+      "start": 46,
+      "end": 60,
+      "speaker": "Frank White",
+      "text": "Our main concern right now is data residency. We need to ensure all our data stays within the EU."
+    },
+    {
+      "start": 61,
+      "end": 75,
+      "speaker": "Eve Smith",
+      "text": "I completely understand. The good news is our new enterprise tier includes selectable regions."
+    },
+    {
+      "start": 76,
+      "end": 90,
+      "speaker": "Eve Smith",
+      "text": "I can send you the documentation on our EU data centers. Will that help?"
+    },
+    {
+      "start": 91,
+      "end": 105,
+      "speaker": "Frank White",
+      "text": "That would be perfect. If the documentation looks good, we can move forward with a trial next month."
+    },
+    {
+      "start": 106,
+      "end": 120,
+      "speaker": "Eve Smith",
+      "text": "Excellent. We'll also need to sign a new NDA before the trial starts. I'll have legal draft that up."
+    },
+    {
+      "start": 121,
+      "end": 135,
+      "speaker": "Frank White",
+      "text": "What is the pricing for the enterprise tier for 500 seats?"
+    },
+    {
+      "start": 136,
+      "end": 150,
+      "speaker": "Eve Smith",
+      "text": "For 500 seats, we offer a volume discount. It comes down to $45 per seat per month."
+    },
+    {
+      "start": 151,
+      "end": 165,
+      "speaker": "Frank White",
+      "text": "That sounds reasonable. So the total annual contract value would be around $270,000?"
+    },
+    {
+      "start": 166,
+      "end": 180,
+      "speaker": "Eve Smith",
+      "text": "Yes, exactly. And that includes a dedicated customer success manager."
+    },
+    {
+      "start": 181,
+      "end": 195,
+      "speaker": "Frank White",
+      "text": "I will need to run this past our VP of Finance tomorrow."
+    },
+    {
+      "start": 196,
+      "end": 210,
+      "speaker": "Eve Smith",
+      "text": "Sure. I will send over the formal quote along with the EU docs today."
+    },
+    {
+      "start": 211,
+      "end": 225,
+      "speaker": "Frank White",
+      "text": "Great. Please make sure the quote has the 10% volume discount explicitly stated."
+    },
+    {
+      "start": 226,
+      "end": 240,
+      "speaker": "Eve Smith",
+      "text": "I will ensure that is highlighted. Any other questions?"
+    },
+    {
+      "start": 241,
+      "end": 255,
+      "speaker": "Frank White",
+      "text": "No, I think that covers it. Let's aim to sign the NDA by Wednesday."
+    },
+    {
+      "start": 256,
+      "end": 270,
+      "speaker": "Eve Smith",
+      "text": "Sounds like a plan. Looking forward to reviewing the docs. Thanks Frank."
+    },
+    {
+      "start": 271,
+      "end": 285,
+      "speaker": "Frank White",
+      "text": "Thanks Eve, talk soon."
+    }
+  ],
+  "summary": {
+    "overview_text": "Sales discussion with Acme Corp regarding the enterprise tier. The client emphasized the need for EU data residency, which the enterprise tier supports. Eve will send documentation and draft an NDA to proceed with a trial next month.",
+    "keywords": [
+      "enterprise tier",
+      "data residency",
+      "EU",
+      "trial",
+      "NDA"
+    ],
+    "generated_by": "seeded"
+  },
+  "outline_items": [
+    {
+      "title": "Enterprise Introduction",
+      "start_time_seconds": 0
+    },
+    {
+      "title": "Data Residency Concerns",
+      "start_time_seconds": 46
+    },
+    {
+      "title": "Pricing and Discounts",
+      "start_time_seconds": 121
+    },
+    {
+      "title": "Next Steps: Docs & NDA",
+      "start_time_seconds": 196
+    }
+  ],
+  "action_items": [
+    {
+      "text": "Send EU data center documentation to Frank",
+      "assignee": "Eve Smith",
+      "is_completed": true
+    },
+    {
+      "text": "Draft and send new NDA",
+      "assignee": "Eve Smith",
+      "is_completed": false
+    },
+    {
+      "text": "Send formal quote with 10% volume discount",
+      "assignee": "Eve Smith",
+      "is_completed": false
+    },
+    {
+      "text": "Run quote past VP of Finance tomorrow",
+      "assignee": "Frank White",
+      "is_completed": false
+    }
+  ]
+}

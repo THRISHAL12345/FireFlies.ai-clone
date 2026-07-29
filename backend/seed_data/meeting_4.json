@@ -1,0 +1,164 @@
+{
+  "title": "Design Review - Onboarding Flow",
+  "date": "2026-07-27T08:49:47Z",
+  "duration_seconds": 2100,
+  "participants": [
+    {
+      "name": "Diana Prince",
+      "email": "diana@example.com"
+    },
+    {
+      "name": "George King",
+      "email": "george@example.com"
+    }
+  ],
+  "speakers": [
+    "Diana Prince",
+    "George King"
+  ],
+  "transcript": [
+    {
+      "start": 0,
+      "end": 15,
+      "speaker": "Diana Prince",
+      "text": "Thanks for taking the time, George. I want to show you the updated user onboarding flow."
+    },
+    {
+      "start": 16,
+      "end": 30,
+      "speaker": "Diana Prince",
+      "text": "We've simplified the signup steps based on the feedback from last month."
+    },
+    {
+      "start": 31,
+      "end": 45,
+      "speaker": "George King",
+      "text": "Great, let's see it. Oh, I like how you combined the profile setup and team invite into one screen."
+    },
+    {
+      "start": 46,
+      "end": 60,
+      "speaker": "George King",
+      "text": "That's much cleaner. Did it improve the drop-off metrics?"
+    },
+    {
+      "start": 61,
+      "end": 75,
+      "speaker": "Diana Prince",
+      "text": "Yes, exactly. Our metrics showed a big drop-off there. This new flow increased completion by 15%."
+    },
+    {
+      "start": 76,
+      "end": 90,
+      "speaker": "George King",
+      "text": "A 15% increase is massive! That's equivalent to an extra $50,000 in projected revenue this quarter."
+    },
+    {
+      "start": 91,
+      "end": 105,
+      "speaker": "Diana Prince",
+      "text": "However, I'm unsure about the color contrast on the primary CTA button. Do you think it's accessible?"
+    },
+    {
+      "start": 106,
+      "end": 120,
+      "speaker": "George King",
+      "text": "Hmm, let me run it through the contrast checker right now."
+    },
+    {
+      "start": 121,
+      "end": 135,
+      "speaker": "George King",
+      "text": "Yeah, it's a bit low. We should probably darken the purple shade slightly."
+    },
+    {
+      "start": 136,
+      "end": 150,
+      "speaker": "Diana Prince",
+      "text": "Okay, I'll make a note to adjust the CTA colors for accessibility."
+    },
+    {
+      "start": 151,
+      "end": 165,
+      "speaker": "George King",
+      "text": "Will you have it done by tomorrow?"
+    },
+    {
+      "start": 166,
+      "end": 180,
+      "speaker": "Diana Prince",
+      "text": "I will have the final version ready by tomorrow's sync at 10 AM."
+    },
+    {
+      "start": 181,
+      "end": 195,
+      "speaker": "George King",
+      "text": "Awesome. The rest of the flow looks solid to me."
+    },
+    {
+      "start": 196,
+      "end": 210,
+      "speaker": "George King",
+      "text": "I will assign a frontend developer to start scoping out the work on Monday."
+    },
+    {
+      "start": 211,
+      "end": 225,
+      "speaker": "Diana Prince",
+      "text": "Sounds perfect. Is there anything else you want to review today?"
+    },
+    {
+      "start": 226,
+      "end": 240,
+      "speaker": "George King",
+      "text": "No, I think we are all good here. Have a great weekend!"
+    },
+    {
+      "start": 241,
+      "end": 255,
+      "speaker": "Diana Prince",
+      "text": "Thanks George."
+    }
+  ],
+  "summary": {
+    "overview_text": "Review of the new onboarding flow design. The consolidated profile setup screen was approved. A contrast issue on the primary CTA button was identified and will be fixed by Diana before the next sync.",
+    "keywords": [
+      "onboarding",
+      "design",
+      "accessibility",
+      "CTA"
+    ],
+    "generated_by": "seeded"
+  },
+  "outline_items": [
+    {
+      "title": "Onboarding Flow Presentation",
+      "start_time_seconds": 0
+    },
+    {
+      "title": "Accessibility Check",
+      "start_time_seconds": 91
+    },
+    {
+      "title": "Wrap Up",
+      "start_time_seconds": 181
+    }
+  ],
+  "action_items": [
+    {
+      "text": "Adjust CTA button color for accessibility",
+      "assignee": "Diana Prince",
+      "is_completed": false
+    },
+    {
+      "text": "Prepare final version for tomorrow's sync at 10 AM",
+      "assignee": "Diana Prince",
+      "is_completed": false
+    },
+    {
+      "text": "Assign a frontend developer to scope work on Monday",
+      "assignee": "George King",
+      "is_completed": false
+    }
+  ]
+}

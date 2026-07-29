@@ -1,0 +1,156 @@
+{
+    "title": "Fireflies AI Platform Quick Overview",
+    "date": "2024-08-08T15:52:00Z",
+    "duration_seconds": 960,
+    "participants": [
+        {
+            "name": "Krish Ramineni",
+            "email": "krish@fireflies.ai"
+        },
+        {
+            "name": "Diana George",
+            "email": "diana@example.com"
+        }
+    ],
+    "speakers": [
+        "Krish Ramineni",
+        "Diana George"
+    ],
+    "transcript": [
+        {
+            "speaker": "Krish Ramineni",
+            "start": 2,
+            "end": 15,
+            "text": "Now that you've signed up, we're going to show you some of the core features that you can start using right away."
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 16,
+            "end": 35,
+            "text": "Typically, a meeting will be processed within five to ten minutes at the latest after it finishes."
+        },
+        {
+            "speaker": "Diana George",
+            "start": 36,
+            "end": 45,
+            "text": "That's great. What is the usual processing time for a one hour meeting?"
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 46,
+            "end": 60,
+            "text": "It scales linearly, so a 60 minute meeting might take 10 to 12 minutes to process."
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 61,
+            "end": 85,
+            "text": "Now, if I want to search across this meeting in an even faster way, instead of just searching across the transcript, I can use the smart search filter on the left hand side here."
+        },
+        {
+            "speaker": "Diana George",
+            "start": 86,
+            "end": 95,
+            "text": "Does it automatically identify the action items?"
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 96,
+            "end": 120,
+            "text": "Yes, exactly. I need to make sure we assign the action items clearly, so I'll review that."
+        },
+        {
+            "speaker": "Diana George",
+            "start": 121,
+            "end": 135,
+            "text": "Perfect. We will do a full test with the team tomorrow morning."
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 136,
+            "end": 150,
+            "text": "I will send over the documentation link by 5 PM today."
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 151,
+            "end": 175,
+            "text": "So as I'm going through the meeting and I'm at a particular part of the meeting, let's say at 26 minutes in, I want to leave a comment saying review this again."
+        },
+        {
+            "speaker": "Diana George",
+            "start": 176,
+            "end": 190,
+            "text": "Is it possible to share specific soundbites instead of the whole recording?"
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 191,
+            "end": 215,
+            "text": "Yes, you can select any text and generate a soundbite. This has increased user engagement by 40% across our beta testers."
+        },
+        {
+            "speaker": "Diana George",
+            "start": 216,
+            "end": 225,
+            "text": "Wow, 40% is huge. Are there any limits on storage?"
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 226,
+            "end": 245,
+            "text": "We offer unlimited storage on our pro plans for $10 a month."
+        },
+        {
+            "speaker": "Diana George",
+            "start": 246,
+            "end": 255,
+            "text": "I need to upgrade my account then."
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 256,
+            "end": 275,
+            "text": "Just drop a note to support, I'll have them set you up with a free trial next week."
+        },
+        {
+            "speaker": "Diana George",
+            "start": 276,
+            "end": 290,
+            "text": "I will create a task for my IT admin to roll this out on Monday."
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 291,
+            "end": 310,
+            "text": "Let me know if you run into any issues. I can be reached anytime."
+        },
+        {
+            "speaker": "Diana George",
+            "start": 311,
+            "end": 320,
+            "text": "What about the API rate limits?"
+        },
+        {
+            "speaker": "Krish Ramineni",
+            "start": 321,
+            "end": 340,
+            "text": "The API allows 100 requests per minute by default."
+        }
+    ],
+    "summary": {
+        "overview_text": "The meeting showcased Fireflies' comprehensive feature set designed to streamline meeting management and enhance user productivity.",
+        "generated_by": "seeded",
+        "keywords": ["smart search", "processing time", "action items", "soundbites"]
+    },
+    "action_items": [
+        {"text": "Test with the team tomorrow morning", "is_completed": false},
+        {"text": "Send over the documentation link by 5 PM today", "is_completed": false},
+        {"text": "Create a task for the IT admin to roll out on Monday", "is_completed": false}
+    ],
+    "outline_items": [
+        {"title": "Core Features", "start_time_seconds": 2},
+        {"title": "Smart Search & Action Items", "start_time_seconds": 61},
+        {"title": "Soundbites & Pricing", "start_time_seconds": 176}
+    ]
+}
