@@ -20,6 +20,23 @@ export default function NotesTab({ meeting }: NotesTabProps) {
     const [isEditingTitle, setIsEditingTitle] = useState(false);
     const [titleText, setTitleText] = useState(meeting.title);
     const [isSavingTitle, setIsSavingTitle] = useState(false);
+    
+    // Regenerate state
+    const [isRegenerating, setIsRegenerating] = useState(false);
+
+    const handleRegenerate = async () => {
+        setIsRegenerating(true);
+        try {
+            const newSummary = await api.summaries.regenerate(meeting.id);
+            setSummary(newSummary);
+            toast.success("Summary regenerated!");
+        } catch (error) {
+            console.error("Failed to regenerate summary", error);
+            toast.error("Failed to regenerate summary");
+        } finally {
+            setIsRegenerating(false);
+        }
+    };
 
     const handleSaveTitle = async () => {
         if (!titleText.trim() || titleText === meeting.title) {
@@ -167,14 +184,22 @@ export default function NotesTab({ meeting }: NotesTabProps) {
                         </div>
 
                         {/* General Summary */}
-                        <div className="mb-8">
-                            <div className="flex items-center gap-2 text-gray-400 font-medium text-sm mb-4">
+                        <div className="mb-8 flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-gray-400 font-medium text-sm">
                                 <SparklesIcon />
                                 General Summary
                                 <button className="hover:text-gray-600 transition-colors ml-1">
                                     <Copy className="w-4 h-4" />
                                 </button>
                             </div>
+                            <button
+                                onClick={handleRegenerate}
+                                disabled={isRegenerating}
+                                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-md transition-colors disabled:opacity-50"
+                            >
+                                <Zap className="w-3.5 h-3.5" />
+                                {isRegenerating ? 'Regenerating...' : 'Regenerate'}
+                            </button>
                         </div>
 
                         {/* Notes content */}

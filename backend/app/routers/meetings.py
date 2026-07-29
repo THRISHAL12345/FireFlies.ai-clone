@@ -60,7 +60,6 @@ def get_meeting(id: int, db: Session = Depends(get_db)):
 
 @router.post("", response_model=schemas.MeetingDetail)
 def create_meeting(meeting_in: schemas.MeetingCreate, db: Session = Depends(get_db)):
-    # Basic creation, transcript upload handling will be separate or extended here
     db_meeting = models.Meeting(
         title=meeting_in.title,
         date=meeting_in.date,
@@ -77,6 +76,53 @@ def create_meeting(meeting_in: schemas.MeetingCreate, db: Session = Depends(get_
         db.flush()
         db_meeting.participants.append(p_db)
 
+    # Process raw transcript if provided
+    if meeting_in.raw_transcript:
+        import json
+        try:
+            # Try parsing as JSON first
+            segments_data = json.loads(meeting_in.raw_transcript)
+            for i, seg in enumerate(segments_data):
+                # find or create speaker
+                spk_label = seg.get("speaker", "Speaker")
+                spk_db = db.query(models.Speaker).filter(models.Speaker.meeting_id == db_meeting.id, models.Speaker.label == spk_label).first()
+                if not spk_db:
+                    spk_db = models.Speaker(meeting_id=db_meeting.id, label=spk_label)
+                    db.add(spk_db)
+                    db.flush()
+                
+                seg_db = models.TranscriptSegment(
+                    meeting_id=db_meeting.id,
+                    speaker_id=spk_db.id,
+                    start_time_seconds=seg.get("start_time", 0.0),
+                    end_time_seconds=seg.get("end_time", 0.0),
+                    text=seg.get("text", ""),
+                    sort_order=i
+                )
+                db.add(seg_db)
+        except json.JSONDecodeError:
+            # Fallback to plain text parsing
+            lines = [line.strip() for line in meeting_in.raw_transcript.split('\n') if line.strip()]
+            current_time = 0.0
+            for i, line in enumerate(lines):
+                spk_label = f"Speaker {(i % 2) + 1}"
+                spk_db = db.query(models.Speaker).filter(models.Speaker.meeting_id == db_meeting.id, models.Speaker.label == spk_label).first()
+                if not spk_db:
+                    spk_db = models.Speaker(meeting_id=db_meeting.id, label=spk_label)
+                    db.add(spk_db)
+                    db.flush()
+                
+                seg_db = models.TranscriptSegment(
+                    meeting_id=db_meeting.id,
+                    speaker_id=spk_db.id,
+                    start_time_seconds=current_time,
+                    end_time_seconds=current_time + 5.0,
+                    text=line,
+                    sort_order=i
+                )
+                db.add(seg_db)
+                current_time += 5.0
+
     db.commit()
     db.refresh(db_meeting)
     return db_meeting
@@ -88,7 +134,7 @@ def update_meeting(id: int, meeting_in: schemas.MeetingUpdate, db: Session = Dep
         raise HTTPException(status_code=404, detail="Meeting not found")
         
     if meeting_in.title is not None:
-        db_meeting.title = meeting_in.title
+        db_meeting.title = meeting_in.title  # type: ignore
         
     if meeting_in.participants is not None:
         # Simplified: clear and re-add participants

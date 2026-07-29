@@ -21,12 +21,12 @@ def get_summary(meeting_id: int, db: Session = Depends(get_db)):
     # Actually from_attributes should pick up keywords_list property if we aliased it or if we just construct the pydantic model.
     # To be safe, we'll construct it:
     return schemas.Summary(
-        id=summary.id,
-        meeting_id=summary.meeting_id,
-        overview_text=summary.overview_text,
-        keywords=summary.keywords,
-        generated_by=summary.generated_by,
-        created_at=summary.created_at
+        id=summary.id,  # type: ignore
+        meeting_id=summary.meeting_id,  # type: ignore
+        overview_text=summary.overview_text,  # type: ignore
+        keywords=summary.keywords,  # type: ignore
+        generated_by=summary.generated_by,  # type: ignore
+        created_at=summary.created_at  # type: ignore
     )
 
 @router.post("/regenerate", response_model=schemas.Summary)
@@ -48,26 +48,26 @@ def regenerate_summary(meeting_id: int, db: Session = Depends(get_db)):
         db.add(summary)
         
     if llm_result:
-        summary.overview_text = llm_result.get("overview_text", "Failed to parse overview.")
-        summary.keywords = llm_result.get("keywords", [])
-        summary.generated_by = "llm"
+        summary.overview_text = llm_result.get("overview_text", "Failed to parse overview.")  # type: ignore
+        summary.keywords = llm_result.get("keywords", [])  # type: ignore
+        summary.generated_by = "llm"  # type: ignore
         
         # We could also insert action_items and outline here, but for now we focus on updating summary
         # If the user wants full sync, we'd delete old action items and insert new ones
     else:
         # Mock fallback
-        summary.overview_text = "[MOCK] Regenerated LLM Summary for: " + meeting.title
-        summary.keywords = ["mock", "regenerated", "llm"]
-        summary.generated_by = "mock"
+        summary.overview_text = "[MOCK] Regenerated LLM Summary for: " + meeting.title  # type: ignore
+        summary.keywords = ["mock", "regenerated", "llm"]  # type: ignore
+        summary.generated_by = "mock"  # type: ignore
     
     db.commit()
     db.refresh(summary)
     
     return schemas.Summary(
-        id=summary.id,
-        meeting_id=summary.meeting_id,
-        overview_text=summary.overview_text,
-        keywords=summary.keywords,
-        generated_by=summary.generated_by,
-        created_at=summary.created_at
+        id=summary.id,  # type: ignore
+        meeting_id=summary.meeting_id,  # type: ignore
+        overview_text=summary.overview_text,  # type: ignore
+        keywords=summary.keywords,  # type: ignore
+        generated_by=summary.generated_by,  # type: ignore
+        created_at=summary.created_at  # type: ignore
     )

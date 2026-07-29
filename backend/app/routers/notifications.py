@@ -26,7 +26,7 @@ def mark_notifications_read(db: Session = Depends(get_db)):
     unread_notifications = db.query(models.Notification).filter(models.Notification.is_unread == True).all()
     
     for notification in unread_notifications:
-        notification.is_unread = False
+        notification.is_unread = False  # type: ignore
         
     db.commit()
     

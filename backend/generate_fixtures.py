@@ -1,6 +1,6 @@
 import os
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import random
 
 # Ensure seed_data directory exists
@@ -9,7 +9,7 @@ os.makedirs("seed_data", exist_ok=True)
 meetings_data = [
     {
         "title": "Weekly Product Sync",
-        "date": (datetime.utcnow() - timedelta(days=2)).isoformat(),
+        "date": (datetime.now(timezone.utc) - timedelta(days=2)).isoformat(),
         "duration_seconds": 1800,
         "participants": [
             {"name": "Alice Johnson", "email": "alice@example.com"},
@@ -42,7 +42,7 @@ meetings_data = [
     },
     {
         "title": "Q3 Planning Session",
-        "date": (datetime.utcnow() - timedelta(days=5)).isoformat(),
+        "date": (datetime.now(timezone.utc) - timedelta(days=5)).isoformat(),
         "duration_seconds": 3600,
         "participants": [
             {"name": "Alice Johnson", "email": "alice@example.com"},
@@ -77,7 +77,7 @@ meetings_data = [
     },
     {
         "title": "Sales Sync with Acme Corp",
-        "date": (datetime.utcnow() - timedelta(days=10)).isoformat(),
+        "date": (datetime.now(timezone.utc) - timedelta(days=10)).isoformat(),
         "duration_seconds": 2400,
         "participants": [
             {"name": "Eve Smith", "email": "eve@example.com"},
@@ -110,7 +110,7 @@ meetings_data = [
     },
     {
         "title": "Design Review - Onboarding Flow",
-        "date": (datetime.utcnow() - timedelta(days=1)).isoformat(),
+        "date": (datetime.now(timezone.utc) - timedelta(days=1)).isoformat(),
         "duration_seconds": 2100,
         "participants": [
             {"name": "Diana Prince", "email": "diana@example.com"},
@@ -143,7 +143,7 @@ meetings_data = [
     },
     {
         "title": "Incident Post-Mortem",
-        "date": (datetime.utcnow() - timedelta(hours=12)).isoformat(),
+        "date": (datetime.now(timezone.utc) - timedelta(hours=12)).isoformat(),
         "duration_seconds": 3000,
         "participants": [
             {"name": "Alice Johnson", "email": "alice@example.com"},

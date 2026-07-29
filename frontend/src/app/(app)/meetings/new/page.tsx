@@ -54,13 +54,24 @@ export default function NewMeetingPage() {
         .filter(p => p)
         .map(p => ({ name: p }));
 
-      // Note: In a real app we'd upload the file here. 
-      // For the clone, we just create the meeting record.
+      let rawTranscript = undefined;
+      if (selectedFile) {
+          try {
+              rawTranscript = await selectedFile.text();
+          } catch (err) {
+              console.error("Failed to read file", err);
+              toast.error("Failed to read file content");
+              setIsSubmitting(false);
+              return;
+          }
+      }
+
       const newMeeting = await api.meetings.create({
         title: title || 'New Meeting',
         date: new Date(date).toISOString(),
         duration_seconds: parseInt(duration) * 60,
         participants: parsedParticipants,
+        raw_transcript: rawTranscript,
         status: 'processed'
       });
 

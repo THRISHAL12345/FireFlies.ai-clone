@@ -50,9 +50,9 @@ def update_action_item(id: int, action_in: schemas.ActionItemUpdate, db: Session
         raise HTTPException(status_code=404, detail="Action item not found")
         
     if action_in.text is not None:
-        action_item.text = action_in.text
+        action_item.text = action_in.text  # type: ignore
     if action_in.assignee is not None:
-        action_item.assignee = action_in.assignee
+        action_item.assignee = action_in.assignee  # type: ignore
         # Try to resolve participant
         meeting = db.query(models.Meeting).filter(models.Meeting.id == action_item.meeting_id).first()
         participant_id = None
@@ -61,12 +61,12 @@ def update_action_item(id: int, action_in: schemas.ActionItemUpdate, db: Session
                 if p.name == action_in.assignee:
                     participant_id = p.id
                     break
-        action_item.participant_id = participant_id
+        action_item.participant_id = participant_id  # type: ignore
         
     if action_in.is_completed is not None:
-        action_item.is_completed = action_in.is_completed
+        action_item.is_completed = action_in.is_completed  # type: ignore
     if action_in.due_date is not None:
-        action_item.due_date = action_in.due_date
+        action_item.due_date = action_in.due_date  # type: ignore
         
     db.commit()
     db.refresh(action_item)
@@ -78,7 +78,7 @@ def toggle_action_item_complete(id: int, db: Session = Depends(get_db)):
     if not action_item:
         raise HTTPException(status_code=404, detail="Action item not found")
         
-    action_item.is_completed = not action_item.is_completed
+    action_item.is_completed = not action_item.is_completed  # type: ignore
     db.commit()
     db.refresh(action_item)
     return action_item

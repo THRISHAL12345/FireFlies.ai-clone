@@ -62,6 +62,7 @@ export default function TranscriptLine({ segment, isActive, searchQuery, onSeek,
     return (
         <div 
             ref={lineRef}
+            onClick={() => onSeek(segment.start_time_seconds)}
             className={`flex gap-4 p-2 -ml-2 rounded-lg cursor-pointer transition-colors ${
                 isActive 
                     ? 'bg-indigo-50/40' 
@@ -80,15 +81,9 @@ export default function TranscriptLine({ segment, isActive, searchQuery, onSeek,
                         {segment.speaker.label}
                     </span>
                     <span className="text-gray-300">·</span>
-                    <button 
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            onSeek(segment.start_time_seconds);
-                        }}
-                        className="text-[14px] font-medium text-[#0284C7] hover:underline"
-                    >
+                    <span className="text-[14px] font-medium text-[#0284C7]">
                         {formatTime(segment.start_time_seconds)}
-                    </button>
+                    </span>
                 </div>
                 <p className={`text-[15px] leading-[1.6] ${customTextColor ? customTextColor : (isActive ? 'text-gray-900' : 'text-gray-600')}`}>
                     {renderText()}

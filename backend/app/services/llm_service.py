@@ -18,7 +18,7 @@ def get_client() -> OpenAI | None:
 # Use a fast model for chat and summary
 MODEL_NAME = "llama3-8b-8192"
 
-def generate_summary(meeting_title: str, transcript_text: str) -> Dict[str, Any]:
+def generate_summary(meeting_title: str, transcript_text: str) -> Dict[str, Any] | None:
     """
     Calls the LLM to generate a summary for the meeting.
     Returns a dictionary matching the schema for Summary.
@@ -49,12 +49,14 @@ Transcript:
     try:
         response = client.chat.completions.create(
             model=MODEL_NAME,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[{"role": "user", "content": prompt}],  # type: ignore
             response_format={"type": "json_object"},
             temperature=0.3,
         )
         content = response.choices[0].message.content
-        return json.loads(content)
+        if content:
+            return json.loads(content)
+        return None
     except Exception as e:
         print(f"Error generating summary: {e}")
         return None
@@ -76,17 +78,18 @@ Transcript:
 {transcript_text}
 """
 
-    messages = [{"role": "system", "content": system_prompt}]
+    messages: List[Any] = [{"role": "system", "content": system_prompt}]
     messages.extend(chat_history)
     messages.append({"role": "user", "content": query})
     
     try:
         response = client.chat.completions.create(
             model=MODEL_NAME,
-            messages=messages,
+            messages=messages,  # type: ignore
             temperature=0.5,
         )
-        return response.choices[0].message.content
+        content = response.choices[0].message.content
+        return content if content else "Sorry, I couldn't generate a response."
     except Exception as e:
         print(f"Error generating chat response: {e}")
         return "Sorry, I encountered an error while trying to generate a response."
