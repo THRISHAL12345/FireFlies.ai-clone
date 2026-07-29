@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { TranscriptSegment } from '@/lib/types';
 import { Search, FileText, Maximize2, ChevronUp, Sparkles, ArrowUp, X, Loader2 } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
@@ -24,33 +24,42 @@ export default function TranscriptPanel({ segments, currentTime, onSeek }: Trans
     const activeFilter = searchParams.get('aifilter');
 
     const filteredSegments = useMemo(() => {
-        if (!activeFilter) return segments;
+        let result = segments;
         
-        return segments.filter(seg => {
-            const text = seg.text.toLowerCase();
-            const isPositive = /\b(great|awesome|good|perfect|fantastic|excellent|love|happy|success|yes|agreed|thanks|thank you)\b/i.test(text);
-            const isNegative = /\b(bad|terrible|wrong|error|issue|problem|fail|sad|concerned|hate|no|disagree|downtime|outage|starved)\b/i.test(text);
+        if (activeFilter) {
+            result = result.filter(seg => {
+                const text = seg.text.toLowerCase();
+                const isPositive = /\b(great|awesome|good|perfect|fantastic|excellent|love|happy|success|yes|agreed|thanks|thank you)\b/i.test(text);
+                const isNegative = /\b(bad|terrible|wrong|error|issue|problem|fail|sad|concerned|hate|no|disagree|downtime|outage|starved)\b/i.test(text);
 
-            switch (activeFilter) {
-                case 'datetime':
-                    return /\b(tomorrow|yesterday|today|monday|tuesday|wednesday|thursday|friday|saturday|sunday|week|month|year|\d{1,2} (am|pm))\b/i.test(text);
-                case 'tasks':
-                    return /\b(need to|will do|action item|task|assign)\b/i.test(text);
-                case 'metrics':
-                    return /(\d+%|\$\d+|\b(revenue|arr|metrics|percent)\b)/i.test(text);
-                case 'questions':
-                    return /\?/.test(text);
-                case 'positive':
-                    return isPositive;
-                case 'negative':
-                    return isNegative && !isPositive; // Prefer positive if mixed
-                case 'neutral':
-                    return !isPositive && !isNegative;
-                default:
-                    return true;
-            }
-        });
-    }, [segments, activeFilter]);
+                switch (activeFilter) {
+                    case 'datetime':
+                        return /\b(tomorrow|yesterday|today|monday|tuesday|wednesday|thursday|friday|saturday|sunday|week|month|year|\d{1,2} (am|pm))\b/i.test(text);
+                    case 'tasks':
+                        return /\b(need to|will do|action item|task|assign)\b/i.test(text);
+                    case 'metrics':
+                        return /(\d+%|\$\d+|\b(revenue|arr|metrics|percent)\b)/i.test(text);
+                    case 'questions':
+                        return /\?/.test(text);
+                    case 'positive':
+                        return isPositive;
+                    case 'negative':
+                        return isNegative && !isPositive;
+                    case 'neutral':
+                        return !isPositive && !isNegative;
+                    default:
+                        return true;
+                }
+            });
+        }
+        
+        if (searchQuery) {
+            const lowerQuery = searchQuery.toLowerCase();
+            result = result.filter(seg => seg.text.toLowerCase().includes(lowerQuery));
+        }
+        
+        return result;
+    }, [segments, activeFilter, searchQuery]);
 
     const getFilterColor = (filter: string | null) => {
         switch (filter) {
@@ -97,6 +106,10 @@ export default function TranscriptPanel({ segments, currentTime, onSeek }: Trans
         }
     };
 
+    const clearSearch = () => {
+        setSearchQuery('');
+    };
+
     return (
         <div className="flex flex-col h-full bg-white relative">
             {/* Top Toolbar */}
@@ -131,16 +144,23 @@ export default function TranscriptPanel({ segments, currentTime, onSeek }: Trans
             {activeTab === 'transcript' ? (
                 <div className="flex flex-col flex-1 overflow-hidden relative">
                     {/* Search Bar */}
-                    <div className="px-6 py-3 border-b border-gray-100 shrink-0">
-                        <div className="relative">
-                            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <div className="px-6 py-3 border-b border-gray-100 shrink-0 bg-[#F9FAFB]">
+                        <div className="relative flex items-center">
+                            <Search className="w-4 h-4 text-gray-400 absolute left-3" />
                             <input 
                                 type="text" 
                                 placeholder="Find or Replace" 
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-9 pr-4 py-2 bg-transparent text-[14px] text-gray-700 placeholder:text-gray-400 focus:outline-none"
+                                className="w-full pl-9 pr-10 py-1.5 bg-transparent text-[14px] text-gray-700 placeholder:text-gray-400 focus:outline-none"
                             />
+                            {searchQuery && (
+                                <div className="absolute right-3 flex items-center gap-2 text-[13px] text-gray-500">
+                                    <button onClick={clearSearch} className="hover:text-gray-800 p-0.5 rounded transition-colors ml-1">
+                                        <X className="w-3.5 h-3.5" />
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
 

@@ -30,7 +30,7 @@ export default function Sidebar() {
     const topNavItems = [
         { name: 'Home', href: '/', icon: Home },
         { name: 'AskFred', href: '#', icon: Bot, shortcut: 'Ctrl + J' },
-        { name: 'Meetings', href: '#', icon: Video },
+        { name: 'Meetings', href: '/meetings', icon: Video },
         { name: 'Meeting Status', href: '#', icon: Activity },
         { name: 'Uploads', href: '/meetings/new', icon: Upload },
     ];

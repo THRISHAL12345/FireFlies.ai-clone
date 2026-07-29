@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db import engine, Base
 from app.models import domain # Import to ensure models are registered
-from app.routers import meetings, transcripts, summaries, action_items, chat
+from app.routers import meetings, transcripts, summaries, action_items, chat, notifications, participants
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -22,6 +22,8 @@ app.include_router(transcripts.router)
 app.include_router(summaries.router)
 app.include_router(action_items.router)
 app.include_router(chat.router)
+app.include_router(notifications.router)
+app.include_router(participants.router)
 
 @app.get("/")
 def read_root():

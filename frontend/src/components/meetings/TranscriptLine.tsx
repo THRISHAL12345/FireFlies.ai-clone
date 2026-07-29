@@ -34,13 +34,20 @@ export default function TranscriptLine({ segment, isActive, searchQuery, onSeek,
         const parts = segment.text.split(new RegExp(`(${searchQuery})`, 'gi'));
         return (
             <span>
-                {parts.map((part, i) => 
-                    part.toLowerCase() === searchQuery.toLowerCase() ? (
-                        <mark key={i} className="bg-yellow-200 text-gray-900 rounded-sm px-0.5">{part}</mark>
-                    ) : (
-                        <span key={i}>{part}</span>
-                    )
-                )}
+                {parts.map((part, i) => {
+                    const isMatch = part.toLowerCase() === searchQuery.toLowerCase();
+                    if (isMatch) {
+                        return (
+                            <span 
+                                key={i} 
+                                className="rounded-sm px-0.5 text-[#E8348B] bg-pink-50"
+                            >
+                                {part}
+                            </span>
+                        );
+                    }
+                    return <span key={i}>{part}</span>;
+                })}
             </span>
         );
     };

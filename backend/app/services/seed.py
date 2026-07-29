@@ -1,6 +1,6 @@
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 import sys
 
 # Ensure we can import the app modules
@@ -147,6 +147,42 @@ def seed_database():
             )
             db.add(action)
             
+    # Seed Notifications
+    from app.models.domain import Notification
+    from datetime import timedelta
+    
+    now = datetime.now(timezone.utc)
+    
+    n1 = Notification(
+        title="New course: Admin Onboarding 🎓",
+        message="Set up right. Now in the community courses directory.",
+        icon_type="course",
+        action_text="Browse Courses",
+        time_str="07:50 AM",
+        is_unread=True,
+        created_at=now
+    )
+    n2 = Notification(
+        title="Watch the admin controls webinar",
+        message="Learn how to manage privacy, admin controls, and Rules Engine workspace workflows.",
+        icon_type="webinar",
+        action_text="Watch recording ->",
+        time_str="05:58 PM",
+        is_unread=True,
+        created_at=now - timedelta(days=1)
+    )
+    n3 = Notification(
+        title="New: Dictate your questions to Fred",
+        message="Ask your next question out loud.",
+        icon_type="feature",
+        action_text="See it live ->",
+        time_str="05:58 PM",
+        is_unread=True,
+        created_at=now - timedelta(days=1)
+    )
+    
+    db.add_all([n1, n2, n3])
+
     db.commit()
     db.close()
     print("Database seeded successfully!")

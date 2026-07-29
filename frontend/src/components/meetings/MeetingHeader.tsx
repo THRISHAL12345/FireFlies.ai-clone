@@ -16,7 +16,16 @@ interface MeetingHeaderProps {
 export default function MeetingHeader({ meeting }: MeetingHeaderProps) {
     const [showPromo, setShowPromo] = useState(true);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isEditingTitle, setIsEditingTitle] = useState(false);
+    const [editTitle, setEditTitle] = useState(meeting?.title || "");
     const router = useRouter();
+
+    // Sync local state if meeting prop updates
+    React.useEffect(() => {
+        if (meeting?.title) {
+            setEditTitle(meeting.title);
+        }
+    }, [meeting?.title]);
 
     const handleDelete = async () => {
         if (!meeting) return;
@@ -33,6 +42,28 @@ export default function MeetingHeader({ meeting }: MeetingHeaderProps) {
             setIsDeleting(false);
         }
     };
+
+    const handleSaveTitle = async () => {
+        if (!meeting || editTitle.trim() === '' || editTitle === meeting.title) {
+            setIsEditingTitle(false);
+            setEditTitle(meeting?.title || "");
+            return;
+        }
+
+        try {
+            await api.meetings.update(meeting.id, { title: editTitle });
+            toast.success("Meeting title updated");
+            // Optionally reload to fetch updated data (or rely on parent state update)
+            router.refresh();
+        } catch (error) {
+            console.error("Failed to update title", error);
+            toast.error("Failed to update title");
+            setEditTitle(meeting.title);
+        } finally {
+            setIsEditingTitle(false);
+        }
+    };
+    
     const title = meeting?.title || "Loading...";
 
     return (
@@ -61,7 +92,32 @@ export default function MeetingHeader({ meeting }: MeetingHeaderProps) {
                             #All Meetings
                         </Link>
                         <span className="mx-2 font-normal text-gray-300">/</span>
-                        <span className="text-gray-700">{title}</span>
+                        
+                        {isEditingTitle ? (
+                            <input
+                                type="text"
+                                value={editTitle}
+                                onChange={(e) => setEditTitle(e.target.value)}
+                                onBlur={handleSaveTitle}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') handleSaveTitle();
+                                    if (e.key === 'Escape') {
+                                        setEditTitle(meeting?.title || "");
+                                        setIsEditingTitle(false);
+                                    }
+                                }}
+                                className="text-gray-900 border border-indigo-300 rounded px-1.5 py-0.5 outline-none focus:ring-1 focus:ring-indigo-500 bg-white"
+                                autoFocus
+                            />
+                        ) : (
+                            <span 
+                                className="text-gray-700 cursor-pointer hover:bg-gray-100 px-1.5 py-0.5 rounded transition-colors"
+                                onClick={() => setIsEditingTitle(true)}
+                                title="Click to edit title"
+                            >
+                                {title}
+                            </span>
+                        )}
                     </div>
                     <button 
                         onClick={handleDelete}

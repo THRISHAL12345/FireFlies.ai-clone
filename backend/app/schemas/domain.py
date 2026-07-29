@@ -133,3 +133,19 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     role: str
     content: str
+
+class NotificationBase(BaseModel):
+    title: str
+    message: str
+    icon_type: str
+    action_text: str
+    time_str: str
+    is_unread: bool = True
+
+class NotificationCreate(NotificationBase):
+    pass
+
+class Notification(NotificationBase):
+    id: int
+    created_at: datetime
+    model_config = ConfigDict(from_attributes=True)

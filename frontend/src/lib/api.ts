@@ -20,11 +20,23 @@ async function fetchAPI(endpoint: string, options: RequestInit = {}) {
 
 export const api = {
     meetings: {
-        list: (params?: { q?: string; participant?: string; sort?: string }) => {
+        list: (params?: { 
+            q?: string; 
+            participant?: string; 
+            sort?: string;
+            date_from?: string;
+            date_to?: string;
+            duration_min?: number;
+            duration_max?: number;
+        }) => {
             const query = new URLSearchParams();
             if (params?.q) query.append('q', params.q);
             if (params?.participant) query.append('participant', params.participant);
             if (params?.sort) query.append('sort', params.sort);
+            if (params?.date_from) query.append('date_from', params.date_from);
+            if (params?.date_to) query.append('date_to', params.date_to);
+            if (params?.duration_min !== undefined) query.append('duration_min', params.duration_min.toString());
+            if (params?.duration_max !== undefined) query.append('duration_max', params.duration_max.toString());
             
             const queryString = query.toString();
             const url = queryString ? `/api/meetings?${queryString}` : '/api/meetings';
@@ -53,5 +65,12 @@ export const api = {
     chat: {
         sendMessage: (meetingId: number, messages: {role: string, content: string}[]) => 
             fetchAPI(`/api/meetings/${meetingId}/chat`, { method: 'POST', body: JSON.stringify({ messages }) }) as Promise<{role: string, content: string}>,
+    },
+    notifications: {
+        list: () => fetchAPI('/api/notifications') as Promise<import('./types').Notification[]>,
+        markAllRead: () => fetchAPI('/api/notifications/mark-read', { method: 'PATCH' }) as Promise<import('./types').Notification[]>,
+    },
+    participants: {
+        list: () => fetchAPI('/api/participants') as Promise<import('./types').Participant[]>,
     }
 };

@@ -17,6 +17,8 @@ def get_meetings(
     participant: Optional[str] = None,
     date_from: Optional[datetime] = None,
     date_to: Optional[datetime] = None,
+    duration_min: Optional[int] = None,
+    duration_max: Optional[int] = None,
     sort: str = "recent",
 ):
     query = db.query(models.Meeting)
@@ -34,6 +36,12 @@ def get_meetings(
         query = query.join(models.Meeting.participants).filter(
             models.Participant.name.ilike(f"%{participant}%")
         )
+
+    if duration_min is not None:
+        query = query.filter(models.Meeting.duration_seconds >= duration_min)
+
+    if duration_max is not None:
+        query = query.filter(models.Meeting.duration_seconds <= duration_max)
 
     if sort == "recent":
         query = query.order_by(desc(models.Meeting.date))

@@ -4,6 +4,12 @@ export interface Participant {
     email?: string;
 }
 
+export interface Participant {
+    id: number;
+    name: string;
+    email?: string;
+}
+
 export interface Meeting {
     id: number;
     title: string;
@@ -66,4 +72,15 @@ export interface TranscriptSegment {
     text: string;
     sort_order: number;
     speaker: Speaker;
+}
+
+export interface Notification {
+    id: number;
+    title: string;
+    message: string;
+    icon_type: string;
+    action_text: string;
+    time_str: string;
+    is_unread: boolean;
+    created_at: string;
 }

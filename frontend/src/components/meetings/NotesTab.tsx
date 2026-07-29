@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { MeetingDetail, Summary } from '@/lib/types';
 import { api } from '@/lib/api';
-import { Bot, UploadCloud, Video, Copy, Maximize2, Edit2, Check, X } from 'lucide-react';
+import { Bot, UploadCloud, Video, Copy, Maximize2, Edit2, Check, X, Plus, Zap, ArrowRight } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ActionItemsTab from './ActionItemsTab';
 
 interface NotesTabProps {
     meeting: MeetingDetail;
@@ -13,6 +14,7 @@ interface NotesTabProps {
 export default function NotesTab({ meeting }: NotesTabProps) {
     const [summary, setSummary] = useState<Summary | undefined>(meeting.summary);
     const [activeTab, setActiveTab] = useState<'notes' | 'ai_skills'>('notes');
+    const [showVideo, setShowVideo] = useState(false);
     
     // Title editing state
     const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -83,6 +85,23 @@ export default function NotesTab({ meeting }: NotesTabProps) {
             <div className="flex-1 overflow-y-auto p-8">
                 {activeTab === 'notes' ? (
                     <div className="max-w-3xl mx-auto relative">
+                        {/* Video Element */}
+                        {showVideo && (
+                            <div className="w-full aspect-video bg-black rounded-lg mb-6 overflow-hidden relative shadow-md border border-gray-200 flex items-center justify-center group">
+                                {/* This would be the actual <video src={meeting.media_url} /> element */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm group-hover:bg-white/30 transition-colors cursor-pointer border border-white/10 z-10">
+                                    <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1"></div>
+                                </div>
+                                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 z-10 text-white text-[13px] font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span className="shrink-0 font-mono tracking-wider">0:00 / {Math.floor(meeting.duration_seconds / 60)}:{(meeting.duration_seconds % 60).toString().padStart(2, '0')}</span>
+                                    <div className="flex-1 h-1 bg-white/30 rounded-full cursor-pointer relative">
+                                        <div className="absolute left-0 top-0 bottom-0 w-0 bg-indigo-500 rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
                         {/* Title & Video Button */}
                         <div className="flex items-start justify-between mb-2">
                             <div className="flex-1 group relative flex items-center pr-4">
@@ -125,7 +144,10 @@ export default function NotesTab({ meeting }: NotesTabProps) {
                                     </>
                                 )}
                             </div>
-                            <button className="flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-md text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors shrink-0 ml-4">
+                            <button 
+                                onClick={() => setShowVideo(!showVideo)}
+                                className={`flex items-center gap-2 px-3 py-1.5 border rounded-md text-sm font-medium transition-colors shrink-0 ml-4 ${showVideo ? 'bg-indigo-50 text-indigo-700 border-indigo-200 hover:bg-indigo-100' : 'text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                            >
                                 <Video className="w-4 h-4" />
                                 Video
                             </button>
@@ -182,10 +204,90 @@ export default function NotesTab({ meeting }: NotesTabProps) {
                                 <p className="text-gray-500 text-[15px]">No summary generated yet.</p>
                             )}
                         </div>
+
+                        {/* Action Items Section */}
+                        <div className="mt-12 pt-8 border-t border-gray-100">
+                            <ActionItemsTab meetingId={meeting.id} initialItems={meeting.action_items || []} />
+                        </div>
                     </div>
                 ) : (
-                    <div className="flex items-center justify-center h-full text-gray-500">
-                        AI Skills are not enabled for this meeting.
+                    <div className="flex flex-col items-center justify-center h-full max-w-2xl mx-auto px-4 mt-12">
+                        {/* Pink Plus Icon */}
+                        <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
+                            <Plus className="w-6 h-6 text-pink-400" strokeWidth={3} />
+                        </div>
+                        
+                        <h2 className="text-[20px] font-semibold text-gray-800 mb-2">
+                            Extract specific insights from this meeting ✨
+                        </h2>
+                        <p className="text-[14px] text-gray-500 text-center max-w-md mb-10 leading-relaxed">
+                            AI skills analyze your conversations to surface specific insights that's relevant to you.
+                        </p>
+                        
+                        {/* Skills Container */}
+                        <div className="w-full bg-[#F2FBF7] rounded-2xl p-6 border border-emerald-50/50 shadow-sm">
+                            <div className="space-y-3">
+                                {/* Skill Row 1 */}
+                                <div className="bg-white rounded-xl flex items-center justify-between p-3.5 shadow-sm border border-gray-50">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 bg-teal-50 rounded-lg flex items-center justify-center shrink-0">
+                                            <Plus className="w-4 h-4 text-teal-500" strokeWidth={3} />
+                                        </div>
+                                        <span className="text-[14.5px] font-medium text-gray-700">Attendee Contributions</span>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex items-center gap-1.5 text-gray-400">
+                                            <Zap className="w-3.5 h-3.5 fill-current" />
+                                            <span className="text-[13px] font-medium">52.8k</span>
+                                        </div>
+                                        <button className="text-[13.5px] font-medium text-gray-600 hover:text-indigo-600 transition-colors">Run</button>
+                                    </div>
+                                </div>
+                                
+                                {/* Skill Row 2 */}
+                                <div className="bg-white rounded-xl flex items-center justify-between p-3.5 shadow-sm border border-gray-50">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center shrink-0">
+                                            <Plus className="w-4 h-4 text-indigo-500" strokeWidth={3} />
+                                        </div>
+                                        <span className="text-[14.5px] font-medium text-gray-700">Todos</span>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex items-center gap-1.5 text-gray-400">
+                                            <Zap className="w-3.5 h-3.5 fill-current" />
+                                            <span className="text-[13px] font-medium">128.2k</span>
+                                        </div>
+                                        <button className="text-[13.5px] font-medium text-gray-600 hover:text-indigo-600 transition-colors">Run</button>
+                                    </div>
+                                </div>
+                                
+                                {/* Skill Row 3 */}
+                                <div className="bg-white rounded-xl flex items-center justify-between p-3.5 shadow-sm border border-gray-50">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center shrink-0">
+                                            <Plus className="w-4 h-4 text-indigo-500" strokeWidth={3} />
+                                        </div>
+                                        <span className="text-[14.5px] font-medium text-gray-700">Meeting Effectiveness</span>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex items-center gap-1.5 text-gray-400">
+                                            <Zap className="w-3.5 h-3.5 fill-current" />
+                                            <span className="text-[13px] font-medium">22.5k</span>
+                                        </div>
+                                        <button className="text-[13.5px] font-medium text-gray-600 hover:text-indigo-600 transition-colors">Run</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {/* Footer */}
+                            <div className="flex items-center justify-between mt-6 px-1">
+                                <button className="flex items-center gap-1 text-[13px] font-semibold text-indigo-600 hover:text-indigo-700 transition-colors group">
+                                    200+ AI Skills 
+                                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" />
+                                </button>
+                                <span className="text-[12px] text-gray-400 font-medium">Consumes AI credits</span>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

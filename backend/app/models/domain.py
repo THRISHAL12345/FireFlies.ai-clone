@@ -128,3 +128,14 @@ class ActionItem(Base):
     # Relationships
     meeting = relationship("Meeting", back_populates="action_items")
     assigned_participant = relationship("Participant", back_populates="assigned_action_items")
+
+class Notification(Base):
+    __tablename__ = "notifications"
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String)
+    message = Column(String)
+    icon_type = Column(String)
+    action_text = Column(String)
+    time_str = Column(String)
+    is_unread = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
