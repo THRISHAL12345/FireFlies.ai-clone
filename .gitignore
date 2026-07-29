@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+*$py.class
+backend/fireflies.db
+node_modules/
+.next/
