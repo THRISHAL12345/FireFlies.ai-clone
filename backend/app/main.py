@@ -7,7 +7,25 @@ from app.routers import meetings, transcripts, summaries, action_items, chat, no
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
+from app.db import SessionLocal
+from app.services.seed import seed_database
+import os
+
 app = FastAPI(title="Fireflies Clone API")
+
+@app.on_event("startup")
+def startup_event():
+    db = SessionLocal()
+    try:
+        # Check if database is empty
+        meeting_count = db.query(domain.Meeting).count()
+        if meeting_count == 0:
+            print("Database is empty. Running auto-seed...")
+            seed_database()
+    except Exception as e:
+        print(f"Failed to auto-seed database: {e}")
+    finally:
+        db.close()
 
 app.add_middleware(
     CORSMiddleware,
